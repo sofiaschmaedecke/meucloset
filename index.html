@@ -1,299 +1,1020 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Guarda-Roupa Digital 🎨✨</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- CSS Local -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Closet Glam - Clueless Edition ✨</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cherPink: '#ff758c',
+            cherLightPink: '#ff7eb3',
+            cherPastelBg: '#fff0f5',
+            cherCardBg: '#ffffff',
+            cherPlaidYellow: '#fee140',
+            cherGold: '#f6d365',
+            cherPurple: '#b19ffb',
+            cherSoftBg: '#fcf0f7'
+          },
+          fontFamily: {
+            fredoka: ['Fredoka', 'sans-serif'],
+            poppins: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fce4ec;
+      background-image: radial-gradient(#ff80ab 0.75px, transparent 0.75px), radial-gradient(#ff80ab 0.75px, #fce4ec 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      min-height: 100vh;
+    }
+
+    /* Pattern Xadrez Cher */
+    .cher-plaid-pattern {
+      background: linear-gradient(90deg, rgba(254, 225, 64, 0.6) 20%, transparent 20%) 0 0,
+                  linear-gradient(rgba(254, 225, 64, 0.6) 20%, transparent 20%) 0 0,
+                  linear-gradient(90deg, rgba(255, 117, 140, 0.3) 10%, transparent 10%) 0 0,
+                  linear-gradient(rgba(255, 117, 140, 0.3) 10%, transparent 10%) 0 0;
+      background-size: 40px 40px, 40px 40px, 10px 10px, 10px 10px;
+      background-color: #fff9db;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #ffe4e1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff758c;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff4971;
+    }
+
+    /* Retro PC Screen Frame Effect */
+    .retro-pc-border {
+      border: 8px solid #ff758c;
+      box-shadow: 8px 8px 0px #f8a5c2, inset 2px 2px 5px rgba(0,0,0,0.15);
+    }
+
+    /* Glow Text */
+    .glow-title {
+      text-shadow: 2px 2px 0px #ff758c, 4px 4px 0px #ffe4e1;
+    }
+
+    /* Custom Buttons Animation */
+    .btn-cher {
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .btn-cher:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+    .btn-cher:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* Active Nav Tab */
+    .nav-tab.active {
+      background-color: #ff758c;
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 117, 140, 0.4);
+    }
+  </style>
 </head>
-<body>
+<body class="text-gray-800 antialiased pb-12">
 
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <i class="fa-solid fa-shirt"></i>
-            <span>FitCheck!</span>
+  <header class="w-full bg-white/90 backdrop-blur-md border-b-4 border-pink-400 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+      
+      <!-- Logo & Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full cher-plaid-pattern border-2 border-pink-400 flex items-center justify-center text-pink-600 text-2xl shadow">
+          <i class="fa-solid me-0.5 fa-shirt"></i>
         </div>
-        <nav class="nav-links">
-            <button class="nav-btn active" onclick="switchTab('closet')">
-                <i class="fa-solid fa-boxes-stacked"></i> Meu Closet
-            </button>
-            <button class="nav-btn" onclick="switchTab('studio')">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Montar Look
-            </button>
-            <button class="nav-btn" onclick="switchTab('planner')">
-                <i class="fa-solid fa-calendar-days"></i> Agenda da Semana
-            </button>
-            <button class="nav-btn" onclick="switchTab('lookbook')">
-                <i class="fa-solid fa-heart"></i> Meus Favoritos
-            </button>
-        </nav>
-    </header>
+        <div>
+          <h1 class="font-fredoka text-2xl md:text-3xl font-bold text-pink-600 tracking-wide glow-title">
+            Meu Closet Glam
+          </h1>
+          <p class="text-xs font-semibold text-pink-400 uppercase tracking-wider">Cher Horowitz Edition ✨</p>
+        </div>
+      </div>
 
-    <main class="container">
-        <!-- SEÇÃO: CLOSET -->
-        <section id="tab-closet" class="tab-content active">
-            <div class="section-header">
-                <div>
-                    <h1>Meu Guarda-Roupa</h1>
-                    <p>Cadastre suas peças e organize por categoria e vibe!</p>
+      <!-- Navigation Tabs -->
+      <nav class="flex flex-wrap justify-center gap-2 bg-pink-100 p-1.5 rounded-full border border-pink-200">
+        <button onclick="switchTab('closet')" id="tab-closet" class="nav-tab active px-4 py-2 rounded-full font-fredoka text-sm font-medium transition text-pink-700 flex items-center gap-2">
+          <i class="fa-solid fa-boxes-packing"></i> Meu Closet
+        </button>
+        <button onclick="switchTab('computer')" id="tab-computer" class="nav-tab px-4 py-2 rounded-full font-fredoka text-sm font-medium transition text-pink-700 flex items-center gap-2">
+          <i class="fa-solid fa-desktop"></i> PC da Cher
+        </button>
+        <button onclick="switchTab('lookbook')" id="tab-lookbook" class="nav-tab px-4 py-2 rounded-full font-fredoka text-sm font-medium transition text-pink-700 flex items-center gap-2">
+          <i class="fa-solid fa-book-bookmark"></i> Lookbook
+        </button>
+        <button onclick="switchTab('schedule')" id="tab-schedule" class="nav-tab px-4 py-2 rounded-full font-fredoka text-sm font-medium transition text-pink-700 flex items-center gap-2">
+          <i class="fa-solid fa-calendar-heart"></i> Agenda
+        </button>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Container Principal -->
+  <main class="max-w-6xl mx-auto px-4 mt-6">
+
+    <!-- TAB 1: MEU CLOSET -->
+    <section id="sec-closet" class="tab-content block">
+      
+      <!-- Top Action Bar -->
+      <div class="bg-white/80 backdrop-blur border border-pink-200 rounded-2xl p-4 md:p-6 mb-6 shadow-md">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <h2 class="font-fredoka text-xl text-pink-600 font-bold flex items-center gap-2">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Minha Coleção de Roupas
+            </h2>
+            <p class="text-xs text-gray-500">Organize suas peças e arrase no look do dia como em Beverly Hills!</p>
+          </div>
+          
+          <button onclick="openAddModal()" class="btn-cher bg-pink-500 hover:bg-pink-600 text-white font-fredoka px-5 py-2.5 rounded-xl shadow-lg flex items-center gap-2 text-sm w-full md:w-auto justify-center">
+            <i class="fa-solid fa-plus-circle text-lg"></i> Adicionar Nova Peça
+          </button>
+        </div>
+
+        <!-- Filtros -->
+        <div class="mt-5 pt-4 border-t border-pink-100 flex flex-col md:flex-row gap-4 items-center justify-between">
+          <!-- Filtro por Categoria -->
+          <div class="flex items-center gap-2 overflow-x-auto w-full pb-2 md:pb-0">
+            <span class="text-xs font-bold text-pink-400 uppercase tracking-wider whitespace-nowrap"><i class="fa-solid fa-filter"></i> Categoria:</span>
+            <button onclick="filterCategory('All')" class="cat-filter-btn active-cat bg-pink-500 text-white text-xs px-3 py-1.5 rounded-full font-medium transition whitespace-nowrap">Todas</button>
+            <button onclick="filterCategory('Tops')" class="cat-filter-btn bg-pink-100 text-pink-700 text-xs px-3 py-1.5 rounded-full font-medium hover:bg-pink-200 transition whitespace-nowrap">Parte de Cima</button>
+            <button onclick="filterCategory('Bottoms')" class="cat-filter-btn bg-pink-100 text-pink-700 text-xs px-3 py-1.5 rounded-full font-medium hover:bg-pink-200 transition whitespace-nowrap">Parte de Baixo</button>
+            <button onclick="filterCategory('Coats')" class="cat-filter-btn bg-pink-100 text-pink-700 text-xs px-3 py-1.5 rounded-full font-medium hover:bg-pink-200 transition whitespace-nowrap">Casacos</button>
+            <button onclick="filterCategory('Shoes')" class="cat-filter-btn bg-pink-100 text-pink-700 text-xs px-3 py-1.5 rounded-full font-medium hover:bg-pink-200 transition whitespace-nowrap">Calçados</button>
+            <button onclick="filterCategory('Accessories')" class="cat-filter-btn bg-pink-100 text-pink-700 text-xs px-3 py-1.5 rounded-full font-medium hover:bg-pink-200 transition whitespace-nowrap">Acessórios</button>
+          </div>
+
+          <!-- Filtro por Vibe -->
+          <div class="flex items-center gap-2 w-full md:w-auto">
+            <span class="text-xs font-bold text-pink-400 uppercase tracking-wider whitespace-nowrap"><i class="fa-solid fa-sparkles"></i> Vibe:</span>
+            <select id="vibeFilter" onchange="filterVibe(this.value)" class="text-xs bg-pink-50 border border-pink-300 rounded-lg p-1.5 text-pink-800 font-medium focus:ring-2 focus:ring-pink-400 outline-none w-full md:w-auto">
+              <option value="All">Todas as Vibes</option>
+              <option value="Facul">Facul/Estudo</option>
+              <option value="Rolê">Rolê/Chill</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Frio">Frio Chic</option>
+              <option value="Festa">Festa/Glam</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Roupas -->
+      <div id="clothes-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+      
+      <!-- Mensagem quando estiver vazio -->
+      <div id="empty-closet-msg" class="hidden text-center py-16 bg-white/70 rounded-3xl border-2 border-dashed border-pink-300 my-4">
+        <i class="fa-solid fa-folder-open text-4xl text-pink-300 mb-3"></i>
+        <h3 class="font-fredoka text-lg text-pink-500 font-bold">Nenhuma peça encontrada!</h3>
+        <p class="text-xs text-gray-500 mt-1">Que tal adicionar uma nova peça glamourosa ao seu closet?</p>
+      </div>
+    </section>
+
+    <!-- TAB 2: COMPUTADOR DA CHER (MONTADOR DE LOOKS) -->
+    <section id="sec-computer" class="tab-content hidden">
+      <div class="retro-pc-border bg-gradient-to-b from-pink-50 to-white rounded-2xl p-4 md:p-8">
+        
+        <!-- Bar Header do PC -->
+        <div class="bg-pink-500 text-white p-2 rounded-xl mb-6 flex items-center justify-between shadow">
+          <div class="flex items-center gap-2 px-2">
+            <i class="fa-solid fa-heart text-xs text-pink-200"></i>
+            <span class="font-fredoka text-sm tracking-wider">Cher's Wardrobe Matching System v1.0</span>
+          </div>
+          <div class="flex gap-1.5 pr-2">
+            <span class="w-3 h-3 rounded-full bg-yellow-300 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-green-300 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-pink-300 inline-block"></span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Lado Esquerdo: O Manequim / Slots do Look -->
+          <div class="lg:col-span-7 bg-white rounded-2xl p-6 border-2 border-pink-200 shadow-inner flex flex-col items-center">
+            
+            <h3 class="font-fredoka text-lg text-pink-600 mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-user-astronaut"></i> Combinador de Fit
+            </h3>
+
+            <!-- Grid com Slots Verticais -->
+            <div class="w-full max-w-md space-y-3">
+              
+              <!-- Slot 1: Acessório -->
+              <div onclick="openSelectSlotModal('Accessories')" class="group relative cursor-pointer border-2 border-dashed border-pink-300 hover:border-pink-500 bg-pink-50/50 hover:bg-pink-100/50 rounded-2xl p-3 transition flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-white border border-pink-200 flex items-center justify-center overflow-hidden shrink-0 shadow-sm" id="slot-preview-Accessories">
+                  <i class="fa-solid fa-glasses text-2xl text-pink-300 group-hover:scale-110 transition"></i>
                 </div>
-                <button class="btn btn-primary" onclick="openAddModal()">
-                    <i class="fa-solid fa-plus"></i> Nova Peça
+                <div class="flex-grow">
+                  <span class="text-xs font-bold text-pink-400 uppercase tracking-wider block">1. Acessório</span>
+                  <span class="font-fredoka text-sm text-gray-700 font-medium" id="slot-label-Accessories">Clique para escolher...</span>
+                </div>
+                <button type="button" onclick="event.stopPropagation(); clearSlot('Accessories')" class="text-pink-300 hover:text-red-500 p-2"><i class="fa-solid fa-circle-xmark"></i></button>
+              </div>
+
+              <!-- Slot 2: Casaco -->
+              <div onclick="openSelectSlotModal('Coats')" class="group relative cursor-pointer border-2 border-dashed border-pink-300 hover:border-pink-500 bg-pink-50/50 hover:bg-pink-100/50 rounded-2xl p-3 transition flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-white border border-pink-200 flex items-center justify-center overflow-hidden shrink-0 shadow-sm" id="slot-preview-Coats">
+                  <i class="fa-solid fa-vest text-2xl text-pink-300 group-hover:scale-110 transition"></i>
+                </div>
+                <div class="flex-grow">
+                  <span class="text-xs font-bold text-pink-400 uppercase tracking-wider block">2. Sobreposição / Casaco</span>
+                  <span class="font-fredoka text-sm text-gray-700 font-medium" id="slot-label-Coats">Opcional - Escolher...</span>
+                </div>
+                <button type="button" onclick="event.stopPropagation(); clearSlot('Coats')" class="text-pink-300 hover:text-red-500 p-2"><i class="fa-solid fa-circle-xmark"></i></button>
+              </div>
+
+              <!-- Slot 3: Parte de Cima -->
+              <div onclick="openSelectSlotModal('Tops')" class="group relative cursor-pointer border-2 border-dashed border-pink-300 hover:border-pink-500 bg-pink-50/50 hover:bg-pink-100/50 rounded-2xl p-3 transition flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-white border border-pink-200 flex items-center justify-center overflow-hidden shrink-0 shadow-sm" id="slot-preview-Tops">
+                  <i class="fa-solid fa-shirt text-2xl text-pink-300 group-hover:scale-110 transition"></i>
+                </div>
+                <div class="flex-grow">
+                  <span class="text-xs font-bold text-pink-400 uppercase tracking-wider block">3. Parte de Cima</span>
+                  <span class="font-fredoka text-sm text-gray-700 font-medium" id="slot-label-Tops">Clique para escolher...</span>
+                </div>
+                <button type="button" onclick="event.stopPropagation(); clearSlot('Tops')" class="text-pink-300 hover:text-red-500 p-2"><i class="fa-solid fa-circle-xmark"></i></button>
+              </div>
+
+              <!-- Slot 4: Parte de Baixo -->
+              <div onclick="openSelectSlotModal('Bottoms')" class="group relative cursor-pointer border-2 border-dashed border-pink-300 hover:border-pink-500 bg-pink-50/50 hover:bg-pink-100/50 rounded-2xl p-3 transition flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-white border border-pink-200 flex items-center justify-center overflow-hidden shrink-0 shadow-sm" id="slot-preview-Bottoms">
+                  <i class="fa-solid fa-vest-patches text-2xl text-pink-300 group-hover:scale-110 transition"></i>
+                </div>
+                <div class="flex-grow">
+                  <span class="text-xs font-bold text-pink-400 uppercase tracking-wider block">4. Parte de Baixo</span>
+                  <span class="font-fredoka text-sm text-gray-700 font-medium" id="slot-label-Bottoms">Clique para escolher...</span>
+                </div>
+                <button type="button" onclick="event.stopPropagation(); clearSlot('Bottoms')" class="text-pink-300 hover:text-red-500 p-2"><i class="fa-solid fa-circle-xmark"></i></button>
+              </div>
+
+              <!-- Slot 5: Calçado -->
+              <div onclick="openSelectSlotModal('Shoes')" class="group relative cursor-pointer border-2 border-dashed border-pink-300 hover:border-pink-500 bg-pink-50/50 hover:bg-pink-100/50 rounded-2xl p-3 transition flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-white border border-pink-200 flex items-center justify-center overflow-hidden shrink-0 shadow-sm" id="slot-preview-Shoes">
+                  <i class="fa-solid fa-shoe-prints text-2xl text-pink-300 group-hover:scale-110 transition"></i>
+                </div>
+                <div class="flex-grow">
+                  <span class="text-xs font-bold text-pink-400 uppercase tracking-wider block">5. Calçado</span>
+                  <span class="font-fredoka text-sm text-gray-700 font-medium" id="slot-label-Shoes">Clique para escolher...</span>
+                </div>
+                <button type="button" onclick="event.stopPropagation(); clearSlot('Shoes')" class="text-pink-300 hover:text-red-500 p-2"><i class="fa-solid fa-circle-xmark"></i></button>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Lado Direito: Controles do Computador da Cher -->
+          <div class="lg:col-span-5 flex flex-col gap-5">
+            
+            <!-- Box Match Surpresa -->
+            <div class="bg-gradient-to-br from-pink-400 to-pink-600 text-white rounded-2xl p-6 shadow-lg relative overflow-hidden">
+              <div class="absolute -right-6 -bottom-6 text-pink-300/30 text-9xl pointer-events-none">
+                <i class="fa-solid fa-wand-magic"></i>
+              </div>
+              
+              <h3 class="font-fredoka text-xl font-bold mb-1 flex items-center gap-2">
+                <i class="fa-solid fa-dice text-yellow-300"></i> Match Surpresa! ✨
+              </h3>
+              <p class="text-xs text-pink-100 mb-4">Deixe o algoritmo da Cher escolher o look ideal para você!</p>
+              
+              <div class="space-y-3 mb-5">
+                <div>
+                  <label class="text-xs font-semibold text-pink-100 block mb-1">Qual a Vibe de Hoje?</label>
+                  <select id="surpriseVibe" class="w-full text-xs p-2.5 rounded-xl bg-white/20 backdrop-blur border border-white/40 text-white font-medium focus:outline-none focus:bg-pink-600">
+                    <option value="Any" class="text-gray-800">Qualquer Vibe</option>
+                    <option value="Facul" class="text-gray-800">Facul / Estudo</option>
+                    <option value="Rolê" class="text-gray-800">Rolê / Chill</option>
+                    <option value="Shopping" class="text-gray-800">Shopping</option>
+                    <option value="Frio" class="text-gray-800">Frio Chic</option>
+                    <option value="Festa" class="text-gray-800">Festa / Glam</option>
+                  </select>
+                </div>
+              </div>
+
+              <button onclick="generateRandomOutfit()" class="btn-cher w-full bg-yellow-300 hover:bg-yellow-400 text-pink-900 font-fredoka font-bold py-3 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 text-sm">
+                <i class="fa-solid fa-rotate text-base"></i> Sortejar Combinação ✨
+              </button>
+            </div>
+
+            <!-- Box Salvar Fit -->
+            <div class="bg-white rounded-2xl p-6 border-2 border-pink-200 shadow-sm">
+              <h3 class="font-fredoka text-base text-pink-600 font-bold mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-heart-circle-plus"></i> Salvar Fit no Lookbook
+              </h3>
+              
+              <div class="space-y-3">
+                <div>
+                  <label class="text-xs text-gray-500 block mb-1">Nome do Look / Ocasião:</label>
+                  <input type="text" id="outfitNameInput" placeholder="Ex: Look Xadrez Segundas..." class="w-full text-sm p-2.5 rounded-xl bg-pink-50/50 border border-pink-200 text-gray-800 focus:outline-none focus:border-pink-400">
+                </div>
+
+                <button onclick="saveCurrentOutfit()" class="btn-cher w-full bg-pink-500 hover:bg-pink-600 text-white font-fredoka font-bold py-3 px-4 rounded-xl shadow flex items-center justify-center gap-2 text-sm">
+                  <i class="fa-solid fa-bookmark"></i> Salvar Fit 💖
                 </button>
+              </div>
             </div>
 
-            <!-- Filtros -->
-            <div class="filters-bar">
-                <div class="filter-group">
-                    <span class="filter-label">Categoria:</span>
-                    <button class="chip active" onclick="filterCategory('all', this)">Todas</button>
-                    <button class="chip" onclick="filterCategory('top', this)">👕 Tops / Blusas</button>
-                    <button class="chip" onclick="filterCategory('bottom', this)">👖 Calças / Saias</button>
-                    <button class="chip" onclick="filterCategory('outerwear', this)">🧥 Casacos</button>
-                    <button class="chip" onclick="filterCategory('shoes', this)">👟 Calçados</button>
-                    <button class="chip" onclick="filterCategory('accessory', this)">🕶️ Acessórios</button>
-                </div>
-                <div class="filter-group">
-                    <span class="filter-label">Vibe:</span>
-                    <select id="vibeFilter" class="select-input" onchange="applyFilters()">
-                        <option value="all">Todas as Vibes</option>
-                        <option value="facul">📚 Facul</option>
-                        <option value="role">🎉 Rolê</option>
-                        <option value="esporte">🏃 Esporte / Treino</option>
-                        <option value="frio">❄️ Frio Zica</option>
-                        <option value="casual">😎 Casual</option>
-                    </select>
-                </div>
-            </div>
+          </div>
 
-            <div class="clothes-grid" id="closetGrid">
-                <!-- Renderizado via JavaScript -->
-            </div>
-        </section>
-
-        <!-- SEÇÃO: ESTÚDIO DE LOOKS -->
-        <section id="tab-studio" class="tab-content">
-            <div class="section-header">
-                <div>
-                    <h1>Montador de Look ✨</h1>
-                    <p>Crie combinações estilosas ou use a IA para sortear um look do dia!</p>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-accent" onclick="generateRandomOutfit()">
-                        <i class="fa-solid fa-dice"></i> Look Surpresa!
-                    </button>
-                    <button class="btn btn-success" onclick="saveCurrentOutfit()">
-                        <i class="fa-solid fa-floppy-disk"></i> Salvar Look
-                    </button>
-                </div>
-            </div>
-
-            <div class="studio-layout">
-                <!-- Canvas do Look Atual -->
-                <div class="outfit-canvas-card">
-                    <div class="canvas-header">
-                        <input type="text" id="outfitNameInput" class="outfit-title-input" value="Meu Look Sem Nome 🎨" placeholder="Nome do Look...">
-                    </div>
-                    
-                    <div class="outfit-preview-slots">
-                        <div class="slot-card" onclick="openPickerModal('accessory')">
-                            <span class="slot-label">Acessório</span>
-                            <div class="slot-body" id="slot-accessory">
-                                <i class="fa-solid fa-glasses slot-placeholder-icon"></i>
-                                <p>Clique para escolher</p>
-                            </div>
-                        </div>
-                        <div class="slot-card" onclick="openPickerModal('outerwear')">
-                            <span class="slot-label">Casaco / Terceira Peça</span>
-                            <div class="slot-body" id="slot-outerwear">
-                                <i class="fa-solid fa-vest slot-placeholder-icon"></i>
-                                <p>Clique para escolher (Opcional)</p>
-                            </div>
-                        </div>
-                        <div class="slot-card" onclick="openPickerModal('top')">
-                            <span class="slot-label">Parte de Cima (Top)</span>
-                            <div class="slot-body" id="slot-top">
-                                <i class="fa-solid fa-shirt slot-placeholder-icon"></i>
-                                <p>Clique para escolher</p>
-                            </div>
-                        </div>
-                        <div class="slot-card" onclick="openPickerModal('bottom')">
-                            <span class="slot-label">Parte de Baixo (Bottom)</span>
-                            <div class="slot-body" id="slot-bottom">
-                                <i class="fa-solid fa-socks slot-placeholder-icon"></i>
-                                <p>Clique para escolher</p>
-                            </div>
-                        </div>
-                        <div class="slot-card" onclick="openPickerModal('shoes')">
-                            <span class="slot-label">Calçado</span>
-                            <div class="slot-body" id="slot-shoes">
-                                <i class="fa-solid fa-shoe-prints slot-placeholder-icon"></i>
-                                <p>Clique para escolher</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Painel Lateral de Ajuste Rápido -->
-                <div class="studio-sidebar">
-                    <div class="card-box">
-                        <h3><i class="fa-solid fa-cloud-sun"></i> Qual a Vibe de Hoje?</h3>
-                        <div class="form-group">
-                            <label>Ocasião:</label>
-                            <select id="studioVibe" class="select-input">
-                                <option value="facul">📚 Faculdade</option>
-                                <option value="role">🎉 Rolê com Amigos</option>
-                                <option value="esporte">🏃 Treino / Esporte</option>
-                                <option value="casual">😎 Dia a Dia / Casual</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Clima / Temperatura:</label>
-                            <select id="studioWeather" class="select-input">
-                                <option value="hot">☀️ Calor / Ensolarado</option>
-                                <option value="cold">❄️ Frio / Gelado</option>
-                                <option value="mild">🌤️ Agradável / Meio-termo</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-secondary w-100" onclick="clearStudioCanvas()">
-                            <i class="fa-solid fa-rotate-left"></i> Limpar Canvas
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEÇÃO: AGENDA SEMANAL -->
-        <section id="tab-planner" class="tab-content">
-            <div class="section-header">
-                <div>
-                    <h1>Agenda Semanal de Fits 🗓️</h1>
-                    <p>Planeje o que vai usar na semana e não perca tempo de manhã!</p>
-                </div>
-            </div>
-
-            <div class="week-grid">
-                <div class="day-card" id="day-seg">
-                    <div class="day-header">Segunda-Feira</div>
-                    <div class="day-content" id="day-slot-seg">
-                        <!-- Renderizado via JS -->
-                    </div>
-                </div>
-                <div class="day-card" id="day-ter">
-                    <div class="day-header">Terça-Feira</div>
-                    <div class="day-content" id="day-slot-ter"></div>
-                </div>
-                <div class="day-card" id="day-qua">
-                    <div class="day-header">Quarta-Feira</div>
-                    <div class="day-content" id="day-slot-qua"></div>
-                </div>
-                <div class="day-card" id="day-qui">
-                    <div class="day-header">Quinta-Feira</div>
-                    <div class="day-content" id="day-slot-qui"></div>
-                </div>
-                <div class="day-card" id="day-sex">
-                    <div class="day-header">Sexta-Feira</div>
-                    <div class="day-content" id="day-slot-sex"></div>
-                </div>
-                <div class="day-card" id="day-sab">
-                    <div class="day-header">Sábado</div>
-                    <div class="day-content" id="day-slot-sab"></div>
-                </div>
-                <div class="day-card" id="day-dom">
-                    <div class="day-header">Domingo</div>
-                    <div class="day-content" id="day-slot-dom"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEÇÃO: LOOKBOOK / FAVORITOS -->
-        <section id="tab-lookbook" class="tab-content">
-            <div class="section-header">
-                <div>
-                    <h1>Meus Looks Salvos ❤️</h1>
-                    <p>Sua galeria de combinações favoritas prontas para usar.</p>
-                </div>
-            </div>
-
-            <div class="lookbook-grid" id="lookbookGrid">
-                <!-- Renderizado via JS -->
-            </div>
-        </section>
-    </main>
-
-    <!-- MODAL: NOVA PEÇA -->
-    <div class="modal" id="addModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Adicionar Nova Peça</h2>
-                <button class="close-btn" onclick="closeAddModal()">&times;</button>
-            </div>
-            <form id="addPieceForm" onsubmit="handleAddPiece(event)">
-                <div class="form-group">
-                    <label>Nome / Descrição da Peça:</label>
-                    <input type="text" id="pieceName" class="text-input" placeholder="Ex: Camiseta Oversized Preta" required>
-                </div>
-                <div class="form-group">
-                    <label>Foto da Peça:</label>
-                    <input type="file" id="pieceImage" accept="image/*" class="file-input" required onchange="previewImage(event)">
-                    <div class="image-preview" id="imagePreview">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <span>Selecione uma imagem do seu dispositivo</span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Categoria:</label>
-                        <select id="pieceCategory" class="select-input" required>
-                            <option value="top">👕 Parte de Cima (Top)</option>
-                            <option value="bottom">👖 Parte de Baixo (Bottom)</option>
-                            <option value="outerwear">🧥 Casaco / Sobretudo</option>
-                            <option value="shoes">👟 Calçado</option>
-                            <option value="accessory">🕶️ Acessório</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Vibe Principal:</label>
-                        <select id="pieceVibe" class="select-input" required>
-                            <option value="facul">📚 Facul</option>
-                            <option value="role">🎉 Rolê</option>
-                            <option value="esporte">🏃 Esporte</option>
-                            <option value="frio">❄️ Frio</option>
-                            <option value="casual">😎 Casual</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Cor Predominante:</label>
-                    <input type="color" id="pieceColor" value="#ff7675" class="color-picker">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeAddModal()">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Salvar no Closet</button>
-                </div>
-            </form>
         </div>
-    </div>
 
-    <!-- MODAL: SELECIONAR PEÇA PARA O SLOT -->
-    <div class="modal" id="pickerModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="pickerTitle">Escolha uma peça</h2>
-                <button class="close-btn" onclick="closePickerModal()">&times;</button>
-            </div>
-            <div class="picker-grid" id="pickerGrid">
-                <!-- Renderizado via JS -->
-            </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: LOOKBOOK FAVORITOS -->
+    <section id="sec-lookbook" class="tab-content hidden">
+      <div class="bg-white/80 backdrop-blur border border-pink-200 rounded-2xl p-6 mb-6 shadow-md">
+        <h2 class="font-fredoka text-xl text-pink-600 font-bold flex items-center gap-2">
+          <i class="fa-solid fa-book-heart"></i> Meu Lookbook de Favoritos
+        </h2>
+        <p class="text-xs text-gray-500">Seus conjuntos salvos no stúdio da Cher práticos para agendar na semana!</p>
+      </div>
+
+      <div id="lookbook-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+      <div id="empty-lookbook-msg" class="hidden text-center py-16 bg-white/70 rounded-3xl border-2 border-dashed border-pink-300 my-4">
+        <i class="fa-solid fa-heart-crack text-4xl text-pink-300 mb-3"></i>
+        <h3 class="font-fredoka text-lg text-pink-500 font-bold">Nenhum look salvo no Lookbook ainda!</h3>
+        <p class="text-xs text-gray-500 mt-1">Vá até a aba "PC da Cher" e monte suas melhores combinações!</p>
+      </div>
+    </section>
+
+    <!-- TAB 4: AGENDA SEMANAL DA PATRICINHA -->
+    <section id="sec-schedule" class="tab-content hidden">
+      <div class="bg-white/80 backdrop-blur border border-pink-200 rounded-2xl p-6 mb-6 shadow-md flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h2 class="font-fredoka text-xl text-pink-600 font-bold flex items-center gap-2">
+            <i class="fa-solid fa-calendar-week"></i> Agenda Semanal de Outfits
+          </h2>
+          <p class="text-xs text-gray-500">Planeje o que vestir em cada dia para nunca repetir o look sem querer!</p>
         </div>
-    </div>
+        <button onclick="clearWeeklySchedule()" class="text-xs text-red-500 hover:text-red-700 underline font-medium">
+          Limpar Agenda da Semana
+        </button>
+      </div>
 
-    <!-- JS Local -->
-    <script src="app.js"></script>
+      <!-- Grid dos 7 Dias da Semana -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="schedule-grid">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  
+  <!-- MODAL 1: ADICIONAR NOVA ROUPA -->
+  <div id="addModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border-4 border-pink-300 relative animate-fade-in">
+      
+      <button onclick="closeAddModal()" class="absolute top-4 right-4 text-gray-400 hover:text-pink-500 text-xl font-bold">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <h3 class="font-fredoka text-xl text-pink-600 font-bold mb-4 flex items-center gap-2">
+        <i class="fa-solid fa-shirt"></i> Adicionar ao Closet
+      </h3>
+
+      <form id="addPieceForm" onsubmit="handlePieceSubmit(event)" class="space-y-4">
+        <!-- Upload de Imagem ou Preset -->
+        <div>
+          <label class="text-xs font-bold text-gray-600 block mb-1">Foto da Peça:</label>
+          <div class="flex gap-2 items-center">
+            <input type="file" id="pieceImageFile" accept="image/*" class="text-xs text-gray-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-pink-100 file:text-pink-700 hover:file:bg-pink-200 w-full cursor-pointer">
+          </div>
+          <span class="text-[10px] text-gray-400 mt-1 block">Escolha uma foto do seu dispositivo. Se não escolher, usaremos um ícone bonito!</span>
+        </div>
+
+        <!-- Nome da Peça -->
+        <div>
+          <label class="text-xs font-bold text-gray-600 block mb-1">Nome da Peça:</label>
+          <input type="text" id="pieceName" required placeholder="Ex: Saia Plissada Amarela" class="w-full text-sm p-2.5 rounded-xl bg-pink-50/50 border border-pink-200 text-gray-800 focus:outline-none focus:border-pink-400">
+        </div>
+
+        <!-- Categoria -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs font-bold text-gray-600 block mb-1">Categoria:</label>
+            <select id="pieceCategory" required class="w-full text-xs p-2.5 rounded-xl bg-pink-50/50 border border-pink-200 text-gray-800 focus:outline-none focus:border-pink-400">
+              <option value="Tops">Parte de Cima</option>
+              <option value="Bottoms">Parte de Baixo</option>
+              <option value="Coats">Casaco / Blazer</option>
+              <option value="Shoes">Calçado</option>
+              <option value="Accessories">Acessório</option>
+            </select>
+          </div>
+
+          <!-- Vibe / Ocasião -->
+          <div>
+            <label class="text-xs font-bold text-gray-600 block mb-1">Vibe / Ocasião:</label>
+            <select id="pieceVibe" required class="w-full text-xs p-2.5 rounded-xl bg-pink-50/50 border border-pink-200 text-gray-800 focus:outline-none focus:border-pink-400">
+              <option value="Facul">Facul / Estudo</option>
+              <option value="Rolê">Rolê / Chill</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Frio">Frio Chic</option>
+              <option value="Festa">Festa / Glam</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Cor Dominante -->
+        <div>
+          <label class="text-xs font-bold text-gray-600 block mb-1">Cor Dominante:</label>
+          <input type="text" id="pieceColor" placeholder="Ex: Amarelo Xadrez, Rosa Pastel..." class="w-full text-sm p-2.5 rounded-xl bg-pink-50/50 border border-pink-200 text-gray-800 focus:outline-none focus:border-pink-400">
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="pt-2 flex gap-3">
+          <button type="button" onclick="closeAddModal()" class="w-1/2 py-2.5 text-xs font-fredoka text-gray-500 bg-gray-100 hover:bg-gray-200 rounded-xl">Cancelar</button>
+          <button type="submit" class="w-1/2 py-2.5 text-xs font-fredoka text-white bg-pink-500 hover:bg-pink-600 rounded-xl shadow-md btn-cher">Salvar Peça ✨</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- MODAL 2: SELEÇÃO VISUAL DE ROUPA PARA O SLOT -->
+  <div id="slotModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border-4 border-pink-300 relative flex flex-col max-h-[85vh]">
+      
+      <button onclick="closeSlotModal()" class="absolute top-4 right-4 text-gray-400 hover:text-pink-500 text-xl font-bold">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <h3 class="font-fredoka text-xl text-pink-600 font-bold mb-1 flex items-center gap-2" id="slotModalTitle">
+        Escolher Peça
+      </h3>
+      <p class="text-xs text-gray-400 mb-4">Clique na peça desejada para equipar neste slot do outfit.</p>
+
+      <!-- Lista Scrollável de Peças da Categoria -->
+      <div id="slotModalItems" class="grid grid-cols-2 sm:grid-cols-3 gap-3 overflow-y-auto p-1 flex-grow">
+        <!-- Renderizado via JS -->
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // PEÇAS INICIAIS DEFAULT (Para a tela nunca carregar vazia)
+    const DEFAULT_CLOTHES = [
+      {
+        id: 'c1',
+        name: 'Blazer Xadrez Amarelo Cher',
+        category: 'Coats',
+        vibe: 'Shopping',
+        color: 'Amarelo Xadrez',
+        image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=300&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 'c2',
+        name: 'Saia Plissada Xadrez',
+        category: 'Bottoms',
+        vibe: 'Shopping',
+        color: 'Amarelo Xadrez',
+        image: 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=300&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 'c3',
+        name: 'Cardigan Rosa Soft',
+        category: 'Tops',
+        vibe: 'Facul',
+        color: 'Rosa Chiclete',
+        image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=300&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 'c4',
+        name: 'Moccasin / Loafer Branco',
+        category: 'Shoes',
+        vibe: 'Facul',
+        color: 'Branco',
+        image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=300&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 'c5',
+        name: 'Boina Cor-de-Rosa',
+        category: 'Accessories',
+        vibe: 'Frio',
+        color: 'Rosa',
+        image: 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=300&auto=format&fit=crop&q=80'
+      }
+    ];
+
+    // ESTADO DA APLICAÇÃO
+    let clothes = [];
+    let savedOutfits = [];
+    let weeklySchedule = {
+      'Segunda': null,
+      'Terça': null,
+      'Quarta': null,
+      'Quinta': null,
+      'Sexta': null,
+      'Sábado': null,
+      'Domingo': null
+    };
+
+    // Outfit Atual Selecionado no PC da Cher
+    let currentOutfitSlots = {
+      Accessories: null,
+      Coats: null,
+      Tops: null,
+      Bottoms: null,
+      Shoes: null
+    };
+
+    // Filtros Ativos
+    let currentCatFilter = 'All';
+    let currentVibeFilter = 'All';
+    let activeSlotForSelection = null;
+
+    // INICIALIZAÇÃO DA APLICAÇÃO
+    window.onload = function() {
+      loadDataFromLocalStorage();
+      renderCloset();
+      renderLookbook();
+      renderSchedule();
+      updateSlotPreviews();
+    };
+
+    function loadDataFromLocalStorage() {
+      const storedClothes = localStorage.getItem('cher_closet_clothes');
+      if (storedClothes) {
+        clothes = JSON.parse(storedClothes);
+      } else {
+        clothes = [...DEFAULT_CLOTHES];
+        saveClothesToLocalStorage();
+      }
+
+      const storedOutfits = localStorage.getItem('cher_closet_outfits');
+      if (storedOutfits) {
+        savedOutfits = JSON.parse(storedOutfits);
+      }
+
+      const storedSchedule = localStorage.getItem('cher_closet_schedule');
+      if (storedSchedule) {
+        weeklySchedule = JSON.parse(storedSchedule);
+      }
+    }
+
+    function saveClothesToLocalStorage() {
+      localStorage.setItem('cher_closet_clothes', JSON.stringify(clothes));
+    }
+
+    function saveOutfitsToLocalStorage() {
+      localStorage.setItem('cher_closet_outfits', JSON.stringify(savedOutfits));
+    }
+
+    function saveScheduleToLocalStorage() {
+      localStorage.setItem('cher_closet_schedule', JSON.stringify(weeklySchedule));
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+
+      document.getElementById(`sec-${tabName}`).classList.remove('hidden');
+      document.getElementById(`tab-${tabName}`).classList.add('active');
+    }
+
+    function renderCloset() {
+      const grid = document.getElementById('clothes-grid');
+      const emptyMsg = document.getElementById('empty-closet-msg');
+      grid.innerHTML = '';
+
+      const filtered = clothes.filter(item => {
+        const matchCat = currentCatFilter === 'All' || item.category === currentCatFilter;
+        const matchVibe = currentVibeFilter === 'All' || item.vibe === currentVibeFilter;
+        return matchCat && matchVibe;
+      });
+
+      if (filtered.length === 0) {
+        emptyMsg.classList.remove('hidden');
+        return;
+      } else {
+        emptyMsg.classList.add('hidden');
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl p-3 border border-pink-200 shadow-sm hover:shadow-md transition flex flex-col justify-between group relative';
+        
+        const catBadge = getCategoryBadge(item.category);
+
+        card.innerHTML = `
+          <div>
+            <div class="relative w-full h-36 bg-pink-50 rounded-xl overflow-hidden mb-2 border border-pink-100 flex items-center justify-center">
+              <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/ff758c/ffffff?text=${encodeURIComponent(item.name)}';">
+              <span class="absolute top-2 left-2 text-[10px] font-bold bg-white/90 backdrop-blur text-pink-600 px-2 py-0.5 rounded-full shadow-sm">
+                ${catBadge}
+              </span>
+            </div>
+            <h4 class="font-fredoka text-sm text-gray-800 font-semibold truncate" title="${item.name}">${item.name}</h4>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="text-[10px] bg-pink-100 text-pink-700 font-medium px-2 py-0.5 rounded-md">${item.vibe}</span>
+              ${item.color ? `<span class="text-[10px] text-gray-400 truncate">${item.color}</span>` : ''}
+            </div>
+          </div>
+          <button onclick="deletePiece('${item.id}')" class="mt-3 w-full py-1 text-xs text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition text-center font-medium">
+            <i class="fa-solid fa-trash-can mr-1"></i> Excluir
+          </button>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function getCategoryBadge(cat) {
+      const map = {
+        'Tops': 'Cima',
+        'Bottoms': 'Baixo',
+        'Coats': 'Casaco',
+        'Shoes': 'Calçado',
+        'Accessories': 'Acessório'
+      };
+      return map[cat] || cat;
+    }
+
+    function filterCategory(cat) {
+      currentCatFilter = cat;
+      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+        btn.classList.remove('active-cat', 'bg-pink-500', 'text-white');
+        btn.classList.add('bg-pink-100', 'text-pink-700');
+      });
+      event.target.classList.add('active-cat', 'bg-pink-500', 'text-white');
+      event.target.classList.remove('bg-pink-100', 'text-pink-700');
+      renderCloset();
+    }
+
+    function filterVibe(vibe) {
+      currentVibeFilter = vibe;
+      renderCloset();
+    }
+
+    function openAddModal() {
+      document.getElementById('addModal').classList.remove('hidden');
+    }
+
+    function closeAddModal() {
+      document.getElementById('addModal').classList.add('hidden');
+      document.getElementById('addPieceForm').reset();
+    }
+
+    function handlePieceSubmit(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('pieceName').value;
+      const category = document.getElementById('pieceCategory').value;
+      const vibe = document.getElementById('pieceVibe').value;
+      const color = document.getElementById('pieceColor').value;
+      const fileInput = document.getElementById('pieceImageFile');
+
+      const newId = 'piece_' + Date.now();
+
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const newPiece = {
+            id: newId,
+            name,
+            category,
+            vibe,
+            color,
+            image: evt.target.result
+          };
+          clothes.push(newPiece);
+          saveClothesToLocalStorage();
+          renderCloset();
+          closeAddModal();
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        // Fallback de imagem
+        const fallbackImg = `https://placehold.co/300x300/ff758c/ffffff?text=${encodeURIComponent(name)}`;
+        const newPiece = {
+          id: newId,
+          name,
+          category,
+          vibe,
+          color,
+          image: fallbackImg
+        };
+        clothes.push(newPiece);
+        saveClothesToLocalStorage();
+        renderCloset();
+        closeAddModal();
+      }
+    }
+
+    function deletePiece(id) {
+      clothes = clothes.filter(c => c.id !== id);
+      saveClothesToLocalStorage();
+      renderCloset();
+    }
+
+    function openSelectSlotModal(category) {
+      activeSlotForSelection = category;
+      const modal = document.getElementById('slotModal');
+      const container = document.getElementById('slotModalItems');
+      const title = document.getElementById('slotModalTitle');
+
+      title.innerText = `Escolher ${getCategoryBadge(category)}`;
+      container.innerHTML = '';
+
+      const items = clothes.filter(c => c.category === category);
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-8 text-gray-400">
+            <i class="fa-solid fa-folder-open text-2xl mb-2"></i>
+            <p class="text-xs">Nenhuma peça cadastrada nesta categoria!</p>
+          </div>
+        `;
+      } else {
+        items.forEach(item => {
+          const itemCard = document.createElement('div');
+          itemCard.className = 'bg-pink-50 hover:bg-pink-100 border border-pink-200 rounded-xl p-2 cursor-pointer transition text-center flex flex-col items-center justify-between group';
+          itemCard.onclick = () => selectPieceForSlot(item);
+
+          itemCard.innerHTML = `
+            <img src="${item.image}" class="w-20 h-20 object-cover rounded-lg mb-2 shadow-sm group-hover:scale-105 transition" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ff758c/ffffff?text=Item';">
+            <span class="font-fredoka text-xs text-gray-700 font-medium truncate w-full block">${item.name}</span>
+            <span class="text-[10px] text-pink-500">${item.vibe}</span>
+          `;
+          container.appendChild(itemCard);
+        });
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeSlotModal() {
+      document.getElementById('slotModal').classList.add('hidden');
+      activeSlotForSelection = null;
+    }
+
+    function selectPieceForSlot(item) {
+      currentOutfitSlots[item.category] = item;
+      updateSlotPreviews();
+      closeSlotModal();
+    }
+
+    function clearSlot(category) {
+      currentOutfitSlots[category] = null;
+      updateSlotPreviews();
+    }
+
+    function updateSlotPreviews() {
+      const categories = ['Accessories', 'Coats', 'Tops', 'Bottoms', 'Shoes'];
+
+      categories.forEach(cat => {
+        const previewEl = document.getElementById(`slot-preview-${cat}`);
+        const labelEl = document.getElementById(`slot-label-${cat}`);
+        const item = currentOutfitSlots[cat];
+
+        if (item) {
+          previewEl.innerHTML = `<img src="${item.image}" class="w-full h-full object-cover">`;
+          labelEl.innerText = item.name;
+          labelEl.classList.add('text-pink-600', 'font-bold');
+        } else {
+          const iconMap = {
+            'Accessories': 'fa-glasses',
+            'Coats': 'fa-vest',
+            'Tops': 'fa-shirt',
+            'Bottoms': 'fa-vest-patches',
+            'Shoes': 'fa-shoe-prints'
+          };
+          previewEl.innerHTML = `<i class="fa-solid ${iconMap[cat]} text-2xl text-pink-300"></i>`;
+          labelEl.innerText = cat === 'Coats' ? 'Opcional - Escolher...' : 'Clique para escolher...';
+          labelEl.classList.remove('text-pink-600', 'font-bold');
+        }
+      });
+    }
+
+    function generateRandomOutfit() {
+      const vibe = document.getElementById('surpriseVibe').value;
+      const categories = ['Accessories', 'Coats', 'Tops', 'Bottoms', 'Shoes'];
+
+      categories.forEach(cat => {
+        let pool = clothes.filter(c => c.category === cat);
+        if (vibe !== 'Any') {
+          const vibePool = pool.filter(c => c.vibe === vibe);
+          if (vibePool.length > 0) pool = vibePool;
+        }
+
+        if (pool.length > 0) {
+          const randomIndex = Math.floor(Math.random() * pool.length);
+          currentOutfitSlots[cat] = pool[randomIndex];
+        } else {
+          currentOutfitSlots[cat] = null;
+        }
+      });
+
+      updateSlotPreviews();
+    }
+
+    function saveCurrentOutfit() {
+      const nameInput = document.getElementById('outfitNameInput');
+      const name = nameInput.value.trim() || 'Fit Glam ' + (savedOutfits.length + 1);
+
+      // Checa se ao menos 2 peças principais foram escolhidas
+      if (!currentOutfitSlots.Tops && !currentOutfitSlots.Bottoms) {
+        alert('Por favor, selecione ao menos uma parte de cima ou de baixo para salvar o look!');
+        return;
+      }
+
+      const outfitObj = {
+        id: 'outfit_' + Date.now(),
+        name,
+        dateSaved: new Date().toLocaleDateString('pt-BR'),
+        items: { ...currentOutfitSlots }
+      };
+
+      savedOutfits.push(outfitObj);
+      saveOutfitsToLocalStorage();
+      renderLookbook();
+      nameInput.value = '';
+
+      alert('Look salvo no seu Lookbook com sucesso! 💖');
+    }
+
+    function renderLookbook() {
+      const grid = document.getElementById('lookbook-grid');
+      const emptyMsg = document.getElementById('empty-lookbook-msg');
+      grid.innerHTML = '';
+
+      if (savedOutfits.length === 0) {
+        emptyMsg.classList.remove('hidden');
+        return;
+      } else {
+        emptyMsg.classList.add('hidden');
+      }
+
+      savedOutfits.forEach(outfit => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl p-4 border border-pink-200 shadow-md flex flex-col justify-between';
+
+        // Renderiza thumbnails das peças do outfit
+        let itemsHTML = '<div class="grid grid-cols-5 gap-1 my-3 bg-pink-50 p-2 rounded-xl border border-pink-100">';
+        const categories = ['Accessories', 'Coats', 'Tops', 'Bottoms', 'Shoes'];
+
+        categories.forEach(cat => {
+          const item = outfit.items[cat];
+          if (item) {
+            itemsHTML += `
+              <div class="h-12 rounded-lg overflow-hidden border border-pink-200 bg-white" title="${item.name}">
+                <img src="${item.image}" class="w-full h-full object-cover">
+              </div>
+            `;
+          } else {
+            itemsHTML += `<div class="h-12 rounded-lg border border-dashed border-pink-200 bg-white/50"></div>`;
+          }
+        });
+        itemsHTML += '</div>';
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between">
+              <h4 class="font-fredoka text-base text-pink-600 font-bold">${outfit.name}</h4>
+              <span class="text-[10px] text-gray-400">${outfit.dateSaved}</span>
+            </div>
+            ${itemsHTML}
+          </div>
+          
+          <div class="pt-2 border-t border-pink-100 flex items-center justify-between gap-2">
+            <!-- Botão Agendar -->
+            <select onchange="assignOutfitToDay('${outfit.id}', this.value); this.value='';" class="text-xs bg-pink-100 text-pink-700 font-medium px-2 py-1.5 rounded-lg border-none focus:ring-2 focus:ring-pink-300 outline-none">
+              <option value="">+ Agendar no Dia</option>
+              <option value="Segunda">Segunda-feira</option>
+              <option value="Terça">Terça-feira</option>
+              <option value="Quarta">Quarta-feira</option>
+              <option value="Quinta">Quinta-feira</option>
+              <option value="Sexta">Sexta-feira</option>
+              <option value="Sábado">Sábado</option>
+              <option value="Domingo">Domingo</option>
+            </select>
+
+            <button onclick="deleteOutfit('${outfit.id}')" class="text-xs text-red-400 hover:text-red-600 p-1">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function deleteOutfit(id) {
+      savedOutfits = savedOutfits.filter(o => o.id !== id);
+      saveOutfitsToLocalStorage();
+      renderLookbook();
+    }
+
+    function assignOutfitToDay(outfitId, day) {
+      if (!day) return;
+      const outfit = savedOutfits.find(o => o.id === outfitId);
+      if (!outfit) return;
+
+      weeklySchedule[day] = outfit;
+      saveScheduleToLocalStorage();
+      renderSchedule();
+      alert(`Look "${outfit.name}" agendado para ${day}! ✨`);
+    }
+
+    function renderSchedule() {
+      const grid = document.getElementById('schedule-grid');
+      grid.innerHTML = '';
+
+      const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+
+      days.forEach(day => {
+        const outfit = weeklySchedule[day];
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl p-4 border-2 border-pink-200 shadow-sm flex flex-col justify-between min-h-[180px]';
+
+        let contentHTML = '';
+
+        if (outfit) {
+          contentHTML = `
+            <div class="my-2">
+              <h5 class="font-fredoka text-sm text-pink-600 font-bold truncate">${outfit.name}</h5>
+              <div class="flex gap-1 mt-2 overflow-x-auto pb-1">
+                ${Object.values(outfit.items).filter(Boolean).map(item => `
+                  <img src="${item.image}" class="w-8 h-8 rounded-md object-cover border border-pink-200 shrink-0">
+                `).join('')}
+              </div>
+            </div>
+            <button onclick="removeDayOutfit('${day}')" class="text-[11px] text-red-400 hover:text-red-600 text-left font-medium mt-2">
+              <i class="fa-solid fa-xmark mr-1"></i> Remover do dia
+            </button>
+          `;
+        } else {
+          contentHTML = `
+            <div class="my-auto text-center py-4 text-pink-300">
+              <i class="fa-solid fa-calendar-plus text-xl mb-1"></i>
+              <p class="text-xs">Sem look planejado</p>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between border-b border-pink-100 pb-2">
+            <span class="font-fredoka text-xs font-bold text-gray-700 uppercase tracking-wider">${day}</span>
+            <i class="fa-solid fa-sparkles text-pink-300 text-xs"></i>
+          </div>
+          ${contentHTML}
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function removeDayOutfit(day) {
+      weeklySchedule[day] = null;
+      saveScheduleToLocalStorage();
+      renderSchedule();
+    }
+
+    function clearWeeklySchedule() {
+      if (confirm('Tem certeza que deseja limpar os looks de todos os dias da semana?')) {
+        Object.keys(weeklySchedule).forEach(day => weeklySchedule[day] = null);
+        saveScheduleToLocalStorage();
+        renderSchedule();
+      }
+    }
+  </script>
 </body>
 </html>
